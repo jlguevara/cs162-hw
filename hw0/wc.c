@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	int input;
-	int	lines = 0, words = 0;
+	int	lines = 0, words = 0, chars = 0;
 	bool inword = false;
 
 	while ((input = fgetc(f)) != EOF) {
@@ -41,7 +41,12 @@ int main(int argc, char *argv[]) {
 		if (input == '\n')
 			lines++;
 
+		chars++;
 	}
+
+	char *filename = "";
+	if (argc == 2) 
+		filename = argv[1];
 	
-	printf("%8d%8d\n", lines, words);
+	printf("%8d%8d%8d %s\n", lines, words, chars, filename);
 }
