@@ -2,6 +2,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <stdbool.h>
+#include <ctype.h>
 
 int main(int argc, char *argv[]) {
 	FILE *f;
@@ -19,8 +21,27 @@ int main(int argc, char *argv[]) {
 	else if (argc == 1) {
 		f = stdin;
 	}
+	else {
+		printf("Wrong number of arguments\n");
+		return 1;
+	}
 
 	int input;
-	while ((input = fgetc(f)) != EOF)
-		printf("%c\n", input);
+	int	lines = 0, words = 0;
+	bool inword = false;
+
+	while ((input = fgetc(f)) != EOF) {
+		if (isspace(input))
+			inword = false;
+		else if (!inword) {
+			inword = true;
+			words++;
+		}
+
+		if (input == '\n')
+			lines++;
+
+	}
+	
+	printf("%8d%8d\n", lines, words);
 }

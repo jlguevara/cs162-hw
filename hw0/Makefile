@@ -1,3 +1,5 @@
+all: wc
+
 wc: wc.c
 	gcc -g wc.c -o wc
 
